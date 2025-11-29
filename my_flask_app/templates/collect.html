@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Keystroke Data Collection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Keystroke Dynamics – Data Collection</h2>
+
+    <p>Please type the following password exactly as shown:</p>
+    <h3 style="color: #0077cc; letter-spacing: 2px;">pass</h3>
+
+    <form id="collectForm">
+        <label>User (linked to session)</label>
+        <input type="text" value="Current user" disabled>
+
+        <label for="password">Type the password:</label>
+        <input type="password" id="password" autocomplete="off" required>
+
+        <p id="attemptCounter">Attempt: 0 / 30</p>
+
+        <button type="submit" id="send">Submit Attempt</button>
+        <div id="message"></div>
+    </form>
+
+    <!-- لينك التدريب يظهر بعد ما نكمل 30 محاولة -->
+    <a href="/training" id="goTraining" style="display:none; margin-top:12px; font-weight:600;">
+        Go to Training page
+    </a>
+
+    <a href="/logout" class="logout">Logout</a>
+</div>
+
+<script src="{{ url_for('static', filename='js/collect.js') }}"></script>
+</body>
+</html>

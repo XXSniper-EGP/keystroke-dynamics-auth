@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keystroke Training</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .box {
+            background: white;
+            padding: 30px;
+            width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ddd;
+            text-align: center;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 18px;
+        }
+        #msg {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Typing Training</h2>
+    <p>Type the following password exactly as shown:</p>
+
+    <h3 style="color: green;">pass</h3>
+
+    <input type="password" id="inputField" autocomplete="off" placeholder="typing here..">
+
+    <p id="counter">Attempt: 0 / 20</p>
+
+    <p id="msg"></p>
+</div>
+
+<script>
+let pressTimes = {};
+let lastReleaseTime = null;
+
+let attempts = 0;
+const maxAttempts = 20;
+
+const field = document.getElementById("inputField");
+const counter = document.getElementById("counter");
+const msg = document.getElementById("msg");
+
+// ------------------------
+// تسجيل keystrokes
+// ------------------------
+field.addEventListener("keydown", e => {
+    const key = e.key;
+    if (!pressTimes[key]) {
+        pressTimes[key] = performance.now();
+    }
+});
+
+field.addEventListener("keyup", e => {
+    const key = e.key;
+    const release = performance.now();
+    const press = pressTimes[key] || release;
+    const dwell = release - press;
+
+    let flight = null;
+    if (lastReleaseTime !== null) {
+        flight = press - lastReleaseTime;
+    }
+    lastReleaseTime = release;
+
+    if (key.length === 1) {
+        sendKeystroke(key, press, release, dwell, flight);
+    }
+
+    delete pressTimes[key];
+});
+
+// إرسال البيانات إلى Flask
+function sendKeystroke(key, press, release, dwell, flight) {
+    fetch("/log_keystroke", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            key: key,
+            press_time: press,
+            release_time: release,
+            dwell: dwell,
+            flight: flight
+        })
+    }).catch(err => console.error(err));
+}
+
+// ------------------------
+// عند انتهاء الكتابة
+// ------------------------
+field.addEventListener("input", () => {
+    if (field.value === "pass") {
+        attempts++;
+        counter.textContent = `Attempt: ${attempts} / ${maxAttempts}`;
+        field.value = "";
+        msg.textContent = "Recorded ✓";
+        msg.style.color = "green";
+
+        if (attempts >= maxAttempts) {
+            finishTraining();
+        }
+    }
+});
+
+// ------------------------
+// نهاية التدريب → تدريب ML
+// ------------------------
+function finishTraining() {
+    msg.textContent = "Training Completed! Building Model...";
+    msg.style.color = "blue";
+
+    fetch("/train_model", { method: "POST" })
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === "success") {
+            msg.textContent = "Model Trained Successfully ✔";
+            msg.style.color = "green";
+        } else {
+            msg.textContent = data.message || "Not enough data to train model.";
+            msg.style.color = "red";
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        msg.textContent = "Error while training model.";
+        msg.style.color = "red";
+    });
+}
+</script>
+
+</body>
+</html>

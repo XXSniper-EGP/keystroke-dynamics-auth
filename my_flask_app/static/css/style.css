@@ -1,0 +1,151 @@
+:root{
+  --bg: #f5f8fc;
+  --card: #ffffff;
+  --accent: #4a90e2;
+  --accent-hover: #3b7ac8;
+  --muted: #6b7280;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family: "Inter", system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background:var(--bg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  padding:20px;
+}
+
+/* كارت رئيسي لكل الصفحات */
+.container, .box{
+  width:380px;
+  background:var(--card);
+  border-radius:12px;
+  padding:32px 36px;
+  box-shadow:0 8px 30px rgba(16,24,40,0.08);
+  text-align:center;
+}
+
+/* للعناوين */
+h1,h2{
+  color:#111827;
+  margin-bottom:20px;
+}
+
+h3{
+  margin:12px 0;
+}
+
+/* النصوص والليبلز */
+p{
+  margin-bottom:8px;
+  color:#374151;
+  font-size:14px;
+}
+
+label{
+  display:block;
+  margin-top:10px;
+  margin-bottom:6px;
+  color:var(--muted);
+  font-size:13px;
+  text-align:left;
+}
+
+/* الحقول */
+input{
+  width:100%;
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid #e6e9ef;
+  font-size:15px;
+  outline:none;
+  transition:box-shadow .15s,border-color .15s;
+  margin-bottom:8px;
+}
+
+input:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(74,144,226,0.2);
+}
+
+/* الأزرار */
+button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:8px;
+  margin-top:12px;
+  background:var(--accent);
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  transition:background .15s, transform .05s;
+}
+
+button:hover{
+  background:var(--accent-hover);
+}
+
+button:active{
+  transform:scale(0.98);
+}
+
+/* الروابط */
+a{
+  display:block;
+  margin-top:15px;
+  font-size:14px;
+  color:var(--accent);
+  text-decoration:none;
+}
+
+a:hover{
+  text-decoration:underline;
+}
+
+/* رسائل */
+#message,
+#result,
+.msg{
+  margin-top:10px;
+  font-size:14px;
+}
+
+/* عداد المحاولات */
+#attemptCounter,
+#counter{
+  margin-top:8px;
+  font-size:13px;
+  color:var(--muted);
+}
+
+/* لينك اللوج آوت */
+.logout{
+  margin-top:16px;
+}
+
+/* حقل الباسورد مع أيقونة العين */
+.password-wrapper{
+  position:relative;
+}
+
+.password-wrapper input{
+  padding-right:40px;
+}
+
+.toggle-password{
+  position:absolute;
+  right:10px;
+  top:50%;
+  transform:translateY(-50%);
+  cursor:pointer;
+  font-size:16px;
+  color:#6b7280;
+}

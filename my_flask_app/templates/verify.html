@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify Keystrokes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Verify Your Identity</h2>
+
+    <p>Type your password to verify your typing pattern:</p>
+
+    <h3 style="color: #0077cc; letter-spacing: 2px;">pass</h3>
+
+    <input type="password" id="verifyInput" autocomplete="off">
+
+    <button id="verifyBtn">Verify</button>
+
+    <p id="result"></p>
+
+    <a href="/logout" class="logout">Logout</a>
+</div>
+
+<script src="{{ url_for('static', filename='js/verify.js') }}"></script>
+</body>
+</html>

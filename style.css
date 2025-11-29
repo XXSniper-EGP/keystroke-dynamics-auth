@@ -1,0 +1,80 @@
+:root{
+  --bg: #f5f8fc;
+  --card: #ffffff;
+  --accent: #4a90e2;
+  --accent-hover: #3b7ac8;
+  --muted: #6b7280;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family: "Inter", system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background:var(--bg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  padding:20px;
+}
+
+.container{
+  width:380px;
+  background:var(--card);
+  border-radius:12px;
+  padding:36px;
+  box-shadow:0 8px 30px rgba(16,24,40,0.08);
+}
+
+h2{
+  text-align:center;
+  margin-bottom:20px;
+  color:#111827;
+  font-size:18px;
+}
+
+label{
+  display:block;
+  margin-top:10px;
+  margin-bottom:6px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+input{
+  width:100%;
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid #e6e9ef;
+  font-size:15px;
+  outline:none;
+  transition:box-shadow .15s,border-color .15s;
+}
+
+input:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(74,144,226,0.2);
+}
+
+button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:8px;
+  margin-top:20px;
+  background:var(--accent);
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  transition:.15s;
+}
+
+button:hover{
+  background:var(--accent-hover);
+}
+
+#message{
+  margin-top:12px;
+  font-size:14px;
+  color:green;
+}

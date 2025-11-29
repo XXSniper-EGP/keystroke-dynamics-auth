@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Login Form</h2>
+
+    {% if message %}
+    <h3 style="color:red;">{{ message }}</h3>
+    {% endif %}
+
+    <form method="POST">
+        <input type="text" name="username" placeholder="Username" autocomplete="off" required>
+        <input type="password" name="password" placeholder="Password" autocomplete="off" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <a href="/register">Create new account</a>
+</div>
+
+</body>
+</html>

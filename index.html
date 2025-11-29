@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Keystroke Dynamics - Data Collection</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Keystroke Dynamics - Data Collection</h2>
+
+    <form id="collectForm">
+      <label for="user">User ID</label>
+      <input type="text" id="user" name="user" required autocomplete="off">
+
+      <label for="password">Password (fixed text for all attempts)</label>
+      <input type="password" id="password" name="password" required autocomplete="off">
+
+      <p id="attemptCounter">Attempt: 0 / 30</p>
+
+      <button type="submit" id="send">Send Attempt</button>
+      <div id="message" aria-live="polite"></div>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

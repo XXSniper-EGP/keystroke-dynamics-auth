@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Create Account</h2>
+
+        {% if message %}
+        <p class="msg">{{ message }}</p>
+        {% endif %}
+
+        <form method="POST">
+            <input type="text" name="username" placeholder="Username" autocomplete="off" required>
+
+            <div class="password-wrapper">
+                <input type="password" id="regPassword" name="password" placeholder="Password" autocomplete="off" required>
+                <span class="toggle-password" onclick="togglePassword()">👁</span>
+            </div>
+
+            <button type="submit">Register</button>
+
+            <a href="/">Already have an account ? Login</a>
+        </form>
+    </div>
+
+    <script>
+    function togglePassword() {
+        const input = document.getElementById("regPassword");
+        if (input.type === "password") {
+            input.type = "text";
+        } else {
+            input.type = "password";
+        }
+    }
+    </script>
+
+</body>
+</html>
